@@ -8,9 +8,9 @@ while True:
     print("5 - Listar Sistema")
     print("0 - Sair")
 
-    opcao = input("Escolha uma opção: ")
+opcao = input("Escolha uma opção: ")
 
-    if opcao == "1":
+if opcao == "1":
         nova_placa = input("Digite a placa para adicionar: ")
         if nova_placa not in placas:
             placas.append(nova_placa)
@@ -18,14 +18,14 @@ while True:
         else:
             print(f"A placa {nova_placa} já está no sistema.")
 
-    elif opcao == "2":
+elif opcao == "2":
         consulta = input("Digite a placa para consultar: ")
         if consulta in placas:
             print(f"A placa {consulta} está no sistema.")
         else:
             print(f"A placa {consulta} não foi encontrada.")
 
-    elif opcao == "3":
+elif opcao == "3":
         remove = input("Digite a placa para remover: ")
         if remove in placas:
             placas.remove(remove)
@@ -33,11 +33,11 @@ while True:
         else:
             print(f"A placa {remove} não foi encontrada.")
 
-    elif opcao == "4":
+elif opcao == "4":
         placas.clear()
         print("Sistema limpo com sucesso.")
 
-    elif opcao == "5":
+elif opcao == "5":
         if placas:
             print("Placas no sistema:")
             for p in placas:
@@ -45,9 +45,9 @@ while True:
         else:
             print("Nenhuma placa no sistema.")
 
-    elif opcao == "0":
+ elif opcao == "0":
         print("Saindo do sistema...")
         break
 
-    else:
+ else:
         print("Opção inválida. Tente novamente.")
