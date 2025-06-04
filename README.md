@@ -1,53 +1,102 @@
-# sistema_de_placa
+# sistema de biblioteca 
+livros = []
+
 while True:
-    print("\n--- SISTEMA DE PLACAS ---")
-    print("1 - Adicionar Placas")
-    print("2 - Consultar Placas")
-    print("3 - Remover Placas")
-    print("4 - Limpar Sistema")
-    print("5 - Listar Sistema")
-    print("0 - Sair")
+    print("-------------------------------------")
+    print("      ---    Biblioteca     ---      ")
+    print("-------------------------------------")
+    print("                                     ")
+    print("    1 - [ Adicionar Livros ]         ")
+    print("    2 - [ Consultar Livros ]         ")
+    print("    3 - [ Remover Livros   ]         ")
+    print("    4 - [ Limpar Sistema   ]         ")
+    print("    5 - [ Listar Sistema   ]         ")
+    print("    6 - [ Emprestar livro  ]         ")
+    print("    7 - [ Devolver livro   ]         ")
+    print("    0 - [ Sair             ]         ")
+    print("                                     ")
+    print("-------------------------------------")
 
-opcao = input("Escolha uma opção: ")
 
-if opcao == "1":
-        nova_placa = input("Digite a placa para adicionar: ")
-        if nova_placa not in placas:
-            placas.append(nova_placa)
-            print(f"A placa {nova_placa} foi inserida no sistema.")
+    opcao = input("Escolha uma opção: ")
+
+
+    if opcao == "1":
+        titulo = input("Digite o Título do livro que vai ser adicionado: ")
+        livros.append({"titulo": titulo, "disponivel": True})
+        print(f"O livro '{titulo}' foi inserido no sistema.")
+
+
+    elif opcao == "2":
+        consulta = input("Digite o título do livro para consultar o sistema: ")
+        encontrado = False
+        for livro in livros:
+            if livro["titulo"] == consulta:
+                status = "Disponível" if livro["disponivel"] else "Emprestado"
+                print(f"O livro '{consulta}' está no sistema. Status: {status}")
+                encontrado = True
+        if not encontrado:
+            print(f"O livro '{consulta}' não foi encontrado.")
+
+
+    elif opcao == "3":
+        remove = input("Digite o título do livro para removê-lo: ")
+        for livro in livros:
+            if livro["titulo"] == remove:
+                livros.remove(livro)
+                print(f"O livro '{remove}' foi removido.")
+                break
         else:
-            print(f"A placa {nova_placa} já está no sistema.")
+            print(f"O livro '{remove}' não foi encontrado.")
 
-elif opcao == "2":
-        consulta = input("Digite a placa para consultar: ")
-        if consulta in placas:
-            print(f"A placa {consulta} está no sistema.")
-        else:
-            print(f"A placa {consulta} não foi encontrada.")
 
-elif opcao == "3":
-        remove = input("Digite a placa para remover: ")
-        if remove in placas:
-            placas.remove(remove)
-            print(f"A placa {remove} foi removida.")
-        else:
-            print(f"A placa {remove} não foi encontrada.")
-
-elif opcao == "4":
-        placas.clear()
+    elif opcao == "4":
+        livros.clear()
         print("Sistema limpo com sucesso.")
 
-elif opcao == "5":
-        if placas:
-            print("Placas no sistema:")
-            for p in placas:
-                print(p)
-        else:
-            print("Nenhuma placa no sistema.")
 
- elif opcao == "0":
+    elif opcao == "5":
+        if not livros:
+            print("Nenhum livro na biblioteca.")
+        else:
+            print("Livros na Biblioteca:")
+            for livro in livros:
+                status = "Disponível" if livro["disponivel"] else "Emprestado"
+                print(f"- {livro['titulo']} ({status})")
+
+
+    elif opcao == "6":
+        emprestado = input("Digite o título do livro que deseja emprestar: ")
+        for livro in livros:
+            if livro["titulo"] == emprestado:
+                if livro["disponivel"]:
+                    livro["disponivel"] = False
+                    print(f"O livro '{emprestado}' foi emprestado com sucesso.")
+                else:
+                    print(f"O livro '{emprestado}' já está emprestado.")
+                break
+        else:
+            print(f"O livro '{emprestado}' não foi encontrado.")
+
+
+    elif opcao == "7":
+        devolvido = input("Digite o título do livro que deseja devolver: ")
+        for livro in livros:
+            if livro["titulo"] == devolvido:
+                if not livro["disponivel"]:
+                    livro["disponivel"] = True
+                    print(f"O livro '{devolvido}' foi devolvido com sucesso.")
+                else:
+                    print(f"O livro '{devolvido}' já está disponível.")
+                break
+        else:
+            print(f"O livro '{devolvido}' não foi encontrado.")
+
+
+    elif opcao == "0":
         print("Saindo do sistema...")
         break
 
- else:
-        print("Opção inválida. Tente novamente.")
+
+    else:
+        print("Opção inválida. Tente novamente.") 
